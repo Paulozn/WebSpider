@@ -1,0 +1,56 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Site {
+  id           String    @id @default(cuid())
+  name         String
+  url          String
+  instructions String    @default("extraia todos os produtos")
+  status       String    @default("IDLE") // IDLE, RUNNING, COMPLETED, FAILED
+  lastRun      DateTime?
+  config       String    @default("{}") // JSON string for selectors
+  proxyHost    String?
+  proxyPort    String?
+  proxyUser    String?
+  proxyPass    String?
+  extractions  Extraction[]
+  logs         Log[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Extraction {
+  id        String   @id @default(cuid())
+  siteId    String
+  site      Site     @relation(fields: [siteId], references: [id])
+  data      String   @default("[]") // JSON string of extracted items
+  createdAt DateTime @default(now())
+}
+
+model AppConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // Hashed
+  createdAt DateTime @default(now())
+}
+
+model Log {
+  id        String   @id @default(cuid())
+  type      String   // INFO, ERROR, GEMINI
+  message   String
+  siteId    String?
+  site      Site?    @relation(fields: [siteId], references: [id])
+  createdAt DateTime @default(now())
+}

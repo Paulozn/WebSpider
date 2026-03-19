@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --background: #131314;
+  /* Google AI Studio dark background */
+  --foreground: #e3e3e3;
+  /* Light gray text */
+  --primary: #8ab4f8;
+  /* Google AI Studio blue */
+  --primary-glow: rgba(138, 180, 248, 0.4);
+  --secondary: #c58af9;
+  --accent: #f28b82;
+  --card: #1e1e1f;
+  /* Slightly lighter for cards */
+  --card-border: rgba(255, 255, 255, 0.08);
+  --muted: #a8c7fa;
+  /* Muted text on dark */
+  --muted-foreground: #9aa0a6;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.min-height-vh {
+  min-height: 100vh;
+}
+
+.auth-split {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  /* Light theme for auth */
+  color: #202124;
+}
+
+.auth-form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: white;
+}
+
+.auth-graphic-side {
+  flex: 1.2;
+  display: none;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 4rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .auth-graphic-side {
+    display: flex;
+  }
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    margin-left: 16rem;
+    /* 64 * 0.25rem = 16rem (Sidebar width) */
+  }
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  background: #28292a;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.auth-split input {
+  background: white;
+  border: 1px solid #dadce0;
+  color: #202124;
+}
+
+.auth-split input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+button.primary {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--primary);
+  color: #000;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-split button.primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.auth-split button.primary:hover {
+  background: #4338ca;
+}
+
+button.primary:hover {
+  filter: brightness(1.1);
+}
+
+button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.auth-split .label {
+  color: #5f6368;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.badge.idle {
+  background: rgba(154, 160, 166, 0.1);
+  color: #9aa0a6;
+  border: 1px solid rgba(154, 160, 166, 0.2);
+}
+
+.badge.running {
+  background: rgba(138, 180, 248, 0.1);
+  color: #8ab4f8;
+  border: 1px solid rgba(138, 180, 248, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.badge.completed {
+  background: rgba(129, 201, 149, 0.1);
+  color: #81c995;
+  border: 1px solid rgba(129, 201, 149, 0.2);
+}
+
+.badge.failed {
+  background: rgba(242, 139, 130, 0.1);
+  color: #f28b82;
+  border: 1px solid rgba(242, 139, 130, 0.2);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

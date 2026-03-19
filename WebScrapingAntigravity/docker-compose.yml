@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  scraping-app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./prisma/dev.db:/app/prisma/dev.db
+    environment:
+      - DATABASE_URL=file:./dev.db
+      - NODE_ENV=production
+    restart: always
+
+volumes:
+  db_data:
